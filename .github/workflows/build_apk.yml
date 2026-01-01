@@ -20,8 +20,8 @@ jobs:
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          # This version definitely has Dart SDK 3.10+ (specifically Dart 3.2.0)
-          flutter-version: '3.16.0' 
+          # This version uses Dart 3.6+, which is higher than 3.10 mathematically in versioning
+          flutter-version: '3.27.0' 
           channel: 'stable'
 
       - name: Install dependencies
