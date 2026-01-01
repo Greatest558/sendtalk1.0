@@ -2,8 +2,8 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ main, master ] # Starts build when you push to these branches
-  workflow_dispatch: # Allows you to start the build manually
+    branches: [ main, master ] 
+  workflow_dispatch: 
 
 jobs:
   build:
@@ -15,12 +15,13 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17' # Uses the stable version for Flutter
+          java-version: '17'
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.10.4' # Matches your local version
+          # Using 3.10.6 ensures the Dart SDK matches your ^3.10.4 requirement
+          flutter-version: '3.10.6' 
           channel: 'stable'
 
       - name: Install dependencies
