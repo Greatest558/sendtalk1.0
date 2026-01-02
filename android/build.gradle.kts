@@ -32,3 +32,16 @@ subprojects {
         }
     }
 }
+
+subprojects {
+    afterEvaluate {
+        val androidExtension = project.extensions.findByName("android")
+        if (androidExtension != null) {
+            val android = androidExtension as com.android.build.gradle.BaseExtension
+            if (android.namespace == null) {
+                // This gives older plugins like optimize_battery a temporary ID so they can build
+                android.namespace = project.group.toString().ifEmpty { "com.example.${project.name}" }
+            }
+        }
+    }
+}
