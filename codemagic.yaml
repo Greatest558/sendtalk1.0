@@ -1,0 +1,41 @@
+workflows:
+  sendtalk-build:
+    name: SendTalk Android Build
+    max_build_duration: 60
+    environment:
+      flutter: stable
+      vars:
+        # Optional: Use these only if you have a keystore for release signing
+        ANDROID_KEYSTORE_BASE64: ""
+        ANDROID_KEYSTORE_PASSWORD: ""
+        ANDROID_KEY_ALIAS: ""
+        ANDROID_KEY_PASSWORD: ""
+    scripts:
+      - name: Install Flutter dependencies
+        script: |
+          flutter pub get
+      - name: Analyze
+        script: |
+          flutter analyze
+      - name: Run tests
+        script: |
+          flutter test || true
+      - name: Build debug APK
+        script: |
+          flutter build apk --debug
+      - name: Build release APK
+        script: |
+          if [ -n "$ANDROID_KEYSTORE_BASE64" ]; then
+            echo $ANDROID_KEYSTORE_BASE64 | base64 --decode > android/key.jks
+            flutter build apk --release --flavor prod --target-platform android-arm,android-arm64,android-x64 --keystore android/key.jks --keystore-password $ANDROID_KEYSTORE_PASSWORD --key-alias $ANDROID_KEY_ALIAS --key-password $ANDROID_KEY_PASSWORD
+          else
+            flutter build apk --release
+          fi
+    artifacts:
+      - build/app/outputs/flutter-apk/app-debug.apk
+      - build/app/outputs/flutter-apk/app-release.apk
+    publishing:
+      email:
+        recipients:
+          - greatlogistics35@gmail.com
+        on_build_success: true
