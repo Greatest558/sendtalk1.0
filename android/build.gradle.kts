@@ -5,6 +5,4 @@ buildscript {
     }
 }
 
-tasks.register<Delete>("clean") {
-    delete(rootProject.buildDir)
-}
+// No repositories block here!
