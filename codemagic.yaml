@@ -6,25 +6,12 @@ workflows:
       flutter: stable
     scripts:
       - name: Install Flutter dependencies
-        script: |
-          flutter pub get
-      - name: Analyze
-        script: |
-          flutter analyze
+        script: flutter pub get
+      - name: Analyze code
+        script: flutter analyze
       - name: Run tests
-        script: |
-          flutter test || true
-      - name: Build debug APK
-        script: |
-          flutter build apk --debug
+        script: flutter test || true
       - name: Build release APK
-      - script: /
-          flutter build apk --release
+        script: flutter build apk --release
     artifacts:
-      - build/app/outputs/flutter-apk/app-debug.apk
       - build/app/outputs/flutter-apk/app-release.apk
-    publishing:
-      email:
-        recipients:
-          - greatlogistics35@gmail.com
-        on_build_success: true
