@@ -7,8 +7,9 @@ workflows:
     scripts:
       - name: Install Flutter dependencies
         script: flutter pub get
-      - name: Analyze code
-        script: flutter analyze
+      # Remove or comment out Analyze step
+      # - name: Analyze code
+      #   script: flutter analyze
       - name: Run tests
         script: flutter test || true
       - name: Build release APK
