@@ -15,7 +15,16 @@ pluginManagement {
         mavenCentral()
         gradlePluginPortal()
     }
+
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id.startsWith("org.jetbrains.kotlin")) {
+                useVersion("1.9.24")
+            }
+        }
+    }
 }
+
 
 plugins {
     id("dev.flutter.flutter-plugin-loader") version "1.0.0"
