@@ -28,12 +28,17 @@ jobs:
         run: flutter pub get
 
       - name: Build APK
-        # We add "|| true" to prevent the workflow from stopping if Flutter "yaps" about the missing file
-        # Then we manually move the file to where it belongs
         run: |
           flutter build apk --release || echo "Ignoring Flutter tool search error..."
+          echo "Checking the directory for the APK file..."
+          # This lists all files so we can see the real name in the logs
+          ls -R build/app/outputs/apk/
+          
+          # This creates the target directory
           mkdir -p build/app/outputs/flutter-apk
-          cp build/app/outputs/apk/release/app-release.apk build/app/outputs/flutter-apk/app-release.apk
+          
+          # This uses a wildcard (*) to copy whatever .apk was made
+          cp build/app/outputs/apk/release/*.apk build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
