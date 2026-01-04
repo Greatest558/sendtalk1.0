@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../services/Identity_service.dart';
+import '../services/identity_service.dart';
 import '../services/crypto_service.dart';
 import '../services/routing_service.dart';
 import '../models/message_envelope.dart';
