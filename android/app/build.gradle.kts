@@ -8,7 +8,7 @@ android {
     // Unique ID for your app
     namespace = "com.example.sendtalk_1_0_0" 
     compileSdk = 34
-    ndkVersion = "25.1.8937393" // Stable NDK version
+    ndkVersion = "27.0.12077973" // Stable NDK version
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
