@@ -1,3 +1,6 @@
+scripts:
+  - name: Clean workspace
+    script: flutter clean
 workflows:
   sendtalk-build:
     name: SendTalk Android Build
