@@ -28,11 +28,15 @@ jobs:
         run: flutter pub get
 
       - name: Build APK
-        run: flutter build apk --release
+        # We add "|| true" to prevent the workflow from stopping if Flutter "yaps" about the missing file
+        # Then we manually move the file to where it belongs
+        run: |
+          flutter build apk --release || echo "Ignoring Flutter tool search error..."
+          mkdir -p build/app/outputs/flutter-apk
+          cp build/app/outputs/apk/release/app-release.apk build/app/outputs/flutter-apk/app-release.apk
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: release-apk
-          # THIS IS THE KEY CHANGE:
-          path: build/app/outputs/apk/release/app-release.apksss
+          path: build/app/outputs/flutter-apk/app-release.apk
